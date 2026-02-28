@@ -31,4 +31,6 @@
 *.swo
 *.swp
 
+*.vscode/
+*.github/
 build/*
