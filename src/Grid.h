@@ -12,6 +12,7 @@ struct Grid {
     int width = 1;
     MatrixXdRow V;
     Eigen::MatrixXi F;
+    void generatePerlinNoise(float frequency, float amplitude);
 };
 
 #endif
