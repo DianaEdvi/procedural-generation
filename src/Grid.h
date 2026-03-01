@@ -8,7 +8,7 @@ typedef Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> M
 
 struct Grid {
     Grid();
-    int n = 10;
+    int n = 100;
     int width = 1;
     MatrixXdRow V;
     Eigen::MatrixXi F;
