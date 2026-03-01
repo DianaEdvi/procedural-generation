@@ -50,6 +50,7 @@ double PerlinNoise::noise(double x, double y) {
 
 // Pre-populate the gradient vectors for the grid points
 void PerlinNoise::populateGradients() {
+    srand(time(NULL)); // Seed the random number generator
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             double angle = (static_cast<double>(rand()) / RAND_MAX) * 2.0 * M_PI;
