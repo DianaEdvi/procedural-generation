@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
   
   igl::opengl::glfw::Viewer viewer;
 
-  Level lvl0(0.90, 1.0f);
-  Level lvl1(0.15, 5.0f);
-  Level lvl2(0.05, 10.0f);
+  Level lvl0(0.5, 2.0f);
+  Level lvl1(0.05, 10.0f);
+  Level lvl2(0.02, 40.0f);
 
   PerlinNoise level0(grid.n);
   PerlinNoise level1(grid.n);
