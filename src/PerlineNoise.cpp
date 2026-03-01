@@ -65,5 +65,12 @@ double PerlinNoise::fade(double t) {
     return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
-
-
+PerlinNoise PerlinNoise::operator+(const PerlinNoise &P)
+{
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            this->gradients[i][j].y() += P.gradients[i][j].y();
+        }
+    }
+    return *this;
+}

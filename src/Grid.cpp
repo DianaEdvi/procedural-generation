@@ -30,14 +30,3 @@ Grid::Grid() : V((n + 1) * (n + 1), 3), F(n * n * 2, 3){
         }
     }
 }
-
-void Grid::generatePerlinNoise(float frequency, float amplitude){
-        // Compute Perlin noise values for each vertex in the grid and update the y-coordinate
-        PerlinNoise pn(n); // reuse one instance (cheaper and consistent)
-        for (int i = 0; i < V.rows(); i++){
-            double x = V(i, 0) * frequency;
-            double z = V(i, 2) * frequency;
-            double y = pn.noise(x, z);
-            V(i, 1) = y * amplitude; // scale up the noise value for better visualization
-        }
-}
