@@ -9,13 +9,13 @@ PerlinNoise::PerlinNoise(int n) : n(n), gradients(n, std::vector<Eigen::Vector2d
 }
 
 // Take an integral coordinate and return a pseudo-random gradient vector from the pre-populated grid
-Eigen::Vector2d PerlinNoise::pseudoRandomGradient(int ix, int iy) {
+Eigen::Vector2d PerlinNoise::pseudoRandomGradient(int ix, int iy) const {
     int ixm = ((ix % n) + n) % n;
     int iym = ((iy % n) + n) % n;
     return gradients[ixm][iym];
 }
 
-double PerlinNoise::noise(double x, double y) {
+double PerlinNoise::noise(double x, double y) const {
     int x0 = static_cast<int>(std::floor(x));
     int x1i = x0 + 1;
     int y0 = static_cast<int>(std::floor(y));
@@ -61,7 +61,7 @@ void PerlinNoise::populateGradients() {
 }
 
 // Fade function as defined by Ken Perlin.
-double PerlinNoise::fade(double t) {
+double PerlinNoise::fade(double t) const {
     return t * t * t * (t * (t * 6 - 15) + 10);
 }
 

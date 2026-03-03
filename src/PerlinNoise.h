@@ -9,10 +9,10 @@
 class PerlinNoise {
     public:
         PerlinNoise(int n);  
-        double noise(double x, double y);
-        Eigen::Vector2d pseudoRandomGradient(int ix, int iy);
+        double noise(double x, double y) const;
+        Eigen::Vector2d pseudoRandomGradient(int ix, int iy) const;
         void populateGradients();
-        double fade(double t);
+        double fade(double t) const;
         PerlinNoise operator+(const PerlinNoise& P);
     private:
         int n;
