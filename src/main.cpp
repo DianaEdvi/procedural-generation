@@ -35,6 +35,18 @@ int main(int argc, char *argv[])
         return false;
     };
 
+    bool brushEnabled = false; // Our toggle state
+
+    viewer.callback_key_up = [&](igl::opengl::glfw::Viewer& viewer, unsigned char key, int modifier) -> bool 
+    {    
+        if (key == 'X' || key == 'x') { 
+            brushEnabled = !brushEnabled;
+            std::cout << "Brush Mode: " << (brushEnabled ? "ON" : "OFF") << std::endl;
+            return true;
+        }
+        return false;
+    };
+
     // Plot the mesh
     viewer.data().set_mesh(grid.V, grid.F);
     viewer.data().set_face_based(true);
