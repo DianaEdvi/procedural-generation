@@ -3,15 +3,19 @@
 
 #include <Eigen/Dense>
 
+#include "Terrain.h"
+
 struct Brush {
+    Brush(){}
+    Brush(float rad, float str) : radius(rad), strength(str){} 
     float radius = 1.0f;
     float strength = 0.5f;
 };
 
 struct Terraformer {
-    Terraformer() {}
-    Terraformer(float r, float s) : brush{r, s} {}
-    Brush brush;
+    Terraformer(Terrain& terrain, Brush& brush) :terrain(terrain), brush(brush){}
+    Brush& brush;
+    Terrain& terrain;
     bool applyBrush(const Eigen::Vector3f& ray_origin, const Eigen::Vector3f& ray_dir);
 };
 

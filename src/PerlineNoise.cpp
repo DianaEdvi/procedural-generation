@@ -8,7 +8,7 @@ PerlinNoise::PerlinNoise(int n) : n(n), gradients(n, std::vector<Eigen::Vector2d
     populateGradients();
 }
 
-// Take an integral coordinate and return a pseudo-random gradient vector from the pre-populated grid
+// Take an integral coordinate and return a pseudo-random gradient vector from the pre-populated terrain
 Eigen::Vector2d PerlinNoise::pseudoRandomGradient(int ix, int iy) const {
     int ixm = ((ix % n) + n) % n;
     int iym = ((iy % n) + n) % n;
@@ -48,7 +48,7 @@ double PerlinNoise::noise(double x, double y) const {
     return ix1 + v * (ix2 - ix1);
 }
 
-// Pre-populate the gradient vectors for the grid points
+// Pre-populate the gradient vectors for the terrain points
 void PerlinNoise::populateGradients() {
     srand(time(NULL)); // Seed the random number generator
     for (int i = 0; i < n; i++) {
