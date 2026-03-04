@@ -8,8 +8,9 @@
 struct Brush {
     Brush(){}
     Brush(float rad, float str) : radius(rad), strength(str){} 
-    float radius = 1.0f;
-    float strength = 0.5f;
+    float radius = 20.0f;
+    float strength = 10.0f;
+    Eigen::Vector3f center;
 };
 
 struct Terraformer {
@@ -17,6 +18,7 @@ struct Terraformer {
     Brush& brush;
     Terrain& terrain;
     bool applyBrush(const Eigen::Vector3f& ray_origin, const Eigen::Vector3f& ray_dir);
+    void deformTerrain();
 };
 
 

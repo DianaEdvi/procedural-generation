@@ -64,7 +64,10 @@ int main(int argc, char *argv[])
           Eigen::Vector3d dir = farPlane - nearPlane;
           dir.normalize();
           
-          terraformer.applyBrush(nearPlane.cast<float>(), dir.cast<float>());
+          if (!terraformer.applyBrush(nearPlane.cast<float>(), dir.cast<float>())) return true;
+          terraformer.deformTerrain();
+          viewer.data().set_mesh(terrain.V, terrain.F);
+
 
           return true;
         }  

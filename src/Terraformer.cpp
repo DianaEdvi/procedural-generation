@@ -2,7 +2,7 @@
 
 #include <igl/Hit.h>
 #include <igl/ray_mesh_intersect.h>
-
+#include <cmath>
 
 bool Terraformer::applyBrush(const Eigen::Vector3f& ray_origin, const Eigen::Vector3f& ray_dir) {
     igl::Hit<double> hit;
@@ -28,10 +28,32 @@ bool Terraformer::applyBrush(const Eigen::Vector3f& ray_origin, const Eigen::Vec
         float w_f = 1.0f - u_f - v_f;
         
         // Calculate center
-        Eigen::Vector3f brushCenter = (v0 * w_f) + (v1 * u_f) + (v2 * v_f);
+        brush.center = (v0 * w_f) + (v1 * u_f) + (v2 * v_f);
         
-        std::cout << "Brush center: " << brushCenter.transpose() << std::endl;
         return true;
     }
     return false;
+}
+
+void Terraformer::deformTerrain() {
+    // Loop through every vertex
+    for (int i = 0; i < terrain.V.rows(); i++){
+        // Get vertex and distance to brush
+        Eigen::Vector3f vertex = terrain.V.row(i).cast<float>();
+        float distToBrushCenter = (vertex - brush.center).norm();
+
+        if (distToBrushCenter > brush.radius) continue;
+
+        // Smoothing function
+        float gaussianExp = -1 * (distToBrushCenter * distToBrushCenter)/(2 * brush.radius * brush.radius);
+        float falloff = std::exp(gaussianExp);
+
+        double influence = static_cast<double>(brush.strength * falloff);
+
+        // Add smoothed value to terrain
+        // terrain.V(i, 0) += influence;
+        terrain.V(i, 1) += influence;
+        // terrain.V(i, 2) += influence;
+    }
+
 }
